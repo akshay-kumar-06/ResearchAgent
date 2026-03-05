@@ -6,7 +6,7 @@ import './StatusTracker.css';
  * Status Tracker Component
  * Displays the current state of a running research task
  */
-export default function StatusTracker({ status, query }) {
+export default function StatusTracker({ status, query, errorMessage }) {
     const [progress, setProgress] = useState(15);
 
     // Stages corresponding to the LangGraph agents
@@ -57,7 +57,9 @@ export default function StatusTracker({ status, query }) {
                 <AlertCircle size={48} className="text-error mb-4" />
                 <h3>Research Failed</h3>
                 <p>There was an error processing your query: "{query}"</p>
-                <p className="error-hint">Please try a different query or check your backend connection.</p>
+                <p className="error-hint" style={{ color: "var(--error)", marginTop: "1rem" }}>
+                    {errorMessage || "Please try a different query or check your backend connection."}
+                </p>
             </div>
         );
     }

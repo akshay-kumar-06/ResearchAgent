@@ -141,6 +141,7 @@ function App() {
           <StatusTracker
             status={error ? 'error' : researchStatus}
             query={query}
+            errorMessage={error}
           />
         )}
 

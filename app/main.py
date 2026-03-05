@@ -201,7 +201,7 @@ async def get_research_status(research_id: str):
             status=active["status"],
             query=active["query"],
             execution_time=active.get("result", {}).get("execution_time"),
-            error_message=active.get("error"),
+            error_message=active.get("error") or active.get("result", {}).get("error_message"),
             created_at=active.get("created_at", datetime.now())
         )
     
