@@ -79,6 +79,7 @@ app.add_middleware(
         "http://localhost:8501",          # Streamlit Dev
         "https://dreamsphere.online",     # Production Domain
         "https://www.dreamsphere.online", # Production Domain (www)
+        "https://researchagent-mkus.onrender.com/"
     ],
     allow_credentials=True,
     allow_methods=["*"],
