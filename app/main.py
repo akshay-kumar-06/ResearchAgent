@@ -74,7 +74,12 @@ app = FastAPI(
 # CORS middleware for cross-origin requests
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "http://localhost:5173",          # React Dev
+        "http://localhost:8501",          # Streamlit Dev
+        "https://dreamsphere.online",     # Production Domain
+        "https://www.dreamsphere.online", # Production Domain (www)
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
