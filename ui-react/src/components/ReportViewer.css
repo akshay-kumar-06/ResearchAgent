@@ -1,0 +1,224 @@
+.report-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.report-header {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.report-meta {
+    flex: 1;
+}
+
+.report-query {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.report-stats {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.stat-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+}
+
+.report-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.action-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+    transition: all 0.2s;
+}
+
+.action-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+}
+
+.primary-btn {
+    padding: 0.5rem 1.25rem;
+    height: 40px;
+    background: var(--accent-primary);
+    color: white;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.primary-btn:hover {
+    background: var(--accent-secondary);
+    transform: translateY(-2px);
+}
+
+.report-content {
+    padding: 2.5rem;
+    min-height: 500px;
+    background: var(--bg-secondary);
+    /* Less transparency for better text readability */
+}
+
+/* Markdown Styling */
+.markdown-body {
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    line-height: 1.7;
+}
+
+.markdown-body h1 {
+    font-size: 2.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-subtle);
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+.markdown-body h2 {
+    font-size: 1.75rem;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid var(--border-subtle);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--accent-primary);
+}
+
+.markdown-body h3 {
+    font-size: 1.35rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.markdown-body p {
+    margin-bottom: 1.25rem;
+    color: var(--text-secondary);
+}
+
+.markdown-body strong {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.markdown-body em {
+    font-style: italic;
+}
+
+.markdown-body a {
+    color: var(--accent-secondary);
+    text-decoration: none;
+}
+
+.markdown-body a:hover {
+    text-decoration: underline;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+    padding-left: 2rem;
+    margin-bottom: 1.25rem;
+    color: var(--text-secondary);
+}
+
+.markdown-body li {
+    margin-bottom: 0.5rem;
+}
+
+.markdown-body li>p {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.markdown-body blockquote {
+    padding: 1rem 1.5rem;
+    color: var(--text-muted);
+    border-left: 4px solid var(--accent-primary);
+    background: rgba(139, 92, 246, 0.05);
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.markdown-body blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+.markdown-body code {
+    padding: 0.2em 0.4em;
+    margin: 0;
+    font-size: 85%;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+}
+
+.markdown-body pre {
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #1e1e1e;
+    /* Darker background for code blocks */
+    border-radius: 8px;
+    border: 1px solid var(--border-subtle);
+    margin-bottom: 1.5rem;
+}
+
+.markdown-body pre code {
+    display: inline;
+    max-width: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+}
+
+@media (max-width: 768px) {
+    .report-container {
+        padding: 1rem;
+    }
+
+    .report-header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .report-content {
+        padding: 1.5rem;
+    }
+}
