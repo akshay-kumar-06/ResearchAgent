@@ -5,8 +5,10 @@ pydantic==2.5.3
 pydantic-settings==2.1.0
 
 # LangGraph and LangChain
-
-
+langchain
+langgraph
+langchain-google-genai
+langchain-core
 # Google AI and Web Search
 google-generativeai==0.3.2
 tavily-python==0.7.22
