@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🔬 Multi-Agent Research Assistant
 
 A production-ready, multi-agent AI research assistant that autonomously researches topics and generates comprehensive reports with citations.
@@ -173,3 +174,6 @@ MIT License - see [LICENSE](LICENSE) for details.
 - [FastAPI](https://fastapi.tiangolo.com/) - Process API backend
 - [React](https://react.dev/) - Frontend framework
 - [Vite](https://vitejs.dev/) - Frontend build tool
+=======
+# ResearchAgent
+>>>>>>> 84ac30d1ce4dada7d931c001d2cc9a9da7724bc7
