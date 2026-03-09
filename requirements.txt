@@ -1,16 +1,16 @@
 # FastAPI and server
-fastapi==0.109.0
-uvicorn[standard]==0.27.0
-pydantic==2.5.3
-pydantic-settings==2.1.0
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+pydantic>=2.5.3
+pydantic-settings>=2.1.0
 
 # LangGraph and LangChain
-langchain
-langgraph
-langchain-google-genai
-langchain-core
+langchain>=0.2.0
+langgraph>=0.2.0
+langchain-google-genai>=4.2.0
+langchain-core>=0.2.0
 # Google AI and Web Search
-google-generativeai==0.3.2
+google-generativeai>=0.7.0
 tavily-python==0.7.22
 
 # Frontend and Database
@@ -22,9 +22,9 @@ python-dotenv==1.0.0
 structlog==24.1.0
 
 # Testing
-pytest==7.4.4
-pytest-asyncio==0.23.3
-httpx==0.26.0
+pytest>=7.4.4
+pytest-asyncio>=0.23.3
+httpx>=0.26.0
 
 # Deployment
 gunicorn==21.2.0

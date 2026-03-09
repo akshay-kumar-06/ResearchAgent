@@ -99,8 +99,9 @@ async def writer_node(state: ResearchState) -> ResearchState:
         ])
         
         messages = [
-            SystemMessage(content=WRITER_SYSTEM_PROMPT),
-            HumanMessage(content=f"""Original Query: {state['original_query']}
+            HumanMessage(content=f"""{WRITER_SYSTEM_PROMPT}
+
+Original Query: {state['original_query']}
 
 Research Plan: {state['research_plan']}
 

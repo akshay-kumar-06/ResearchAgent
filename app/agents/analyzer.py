@@ -73,8 +73,9 @@ async def analyzer_node(state: ResearchState) -> ResearchState:
         formatted_results = format_search_results_for_analysis(state)
         
         messages = [
-            SystemMessage(content=ANALYZER_SYSTEM_PROMPT),
-            HumanMessage(content=f"""Original Query: {state['original_query']}
+            HumanMessage(content=f"""{ANALYZER_SYSTEM_PROMPT}
+
+Original Query: {state['original_query']}
 
 Research Plan: {state['research_plan']}
 
