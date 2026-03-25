@@ -8,13 +8,17 @@ import pytest
 from unittest.mock import patch, MagicMock, AsyncMock
 
 from app.agents.planner import parse_planner_output, planner_node
-from app.agents.analyzer import parse_analyzer_output, format_search_results_for_analysis
+from app.agents.analyzer import (
+    parse_analyzer_output,
+    format_search_results_for_analysis,
+)
 from app.agents.writer import writer_node
+from app.agents.state import ResearchState
 
 
 class TestPlannerAgent:
     """Tests for planner agent"""
-    
+
     def test_parse_planner_output_valid(self):
         """Test parsing valid planner output"""
         response = """RESEARCH PLAN: Compare AI regulatory frameworks
@@ -26,11 +30,11 @@ SUB-QUESTIONS:
 4. What are the business impacts?
 """
         plan, questions = parse_planner_output(response)
-        
+
         assert plan == "Compare AI regulatory frameworks"
         assert len(questions) == 4
         assert "What are EU AI regulations?" in questions
-    
+
     def test_parse_planner_output_minimal(self):
         """Test parsing with minimum required questions"""
         response = """RESEARCH PLAN: Research topic
@@ -41,9 +45,9 @@ SUB-QUESTIONS:
 3. Third question?
 """
         plan, questions = parse_planner_output(response)
-        
+
         assert len(questions) == 3
-    
+
     def test_parse_planner_output_insufficient_questions(self):
         """Test parsing with insufficient questions raises error"""
         response = """RESEARCH PLAN: Research topic
@@ -54,7 +58,7 @@ SUB-QUESTIONS:
 """
         with pytest.raises(ValueError, match="insufficient sub-questions"):
             parse_planner_output(response)
-    
+
     def test_parse_planner_output_max_questions(self):
         """Test that output is limited to 5 questions"""
         response = """RESEARCH PLAN: Research topic
@@ -69,9 +73,9 @@ SUB-QUESTIONS:
 7. Q7?
 """
         plan, questions = parse_planner_output(response)
-        
+
         assert len(questions) == 5
-    
+
     @pytest.mark.asyncio
     async def test_planner_node_success(self, sample_research_state, mock_llm_response):
         """Test planner node with successful response"""
@@ -79,9 +83,9 @@ SUB-QUESTIONS:
             mock_llm = AsyncMock()
             mock_llm.ainvoke.return_value = mock_llm_response
             mock_create.return_value = mock_llm
-            
+
             result = await planner_node(sample_research_state)
-            
+
             assert result["status"] == "searching"
             assert result["research_plan"] is not None
             assert len(result["sub_questions"]) >= 3
@@ -89,15 +93,15 @@ SUB-QUESTIONS:
 
 class TestAnalyzerAgent:
     """Tests for analyzer agent"""
-    
+
     def test_format_search_results(self, sample_research_state):
         """Test formatting search results for LLM"""
         formatted = format_search_results_for_analysis(sample_research_state)
-        
+
         assert "Sub-Question:" in formatted
         assert "Title:" in formatted
         assert "URL:" in formatted
-    
+
     def test_parse_analyzer_output_valid(self):
         """Test parsing valid analyzer output"""
         response = """KEY FINDINGS:
@@ -111,7 +115,7 @@ SYNTHESIS:
 The analysis shows different approaches.
 """
         findings, citations, synthesis = parse_analyzer_output(response)
-        
+
         assert len(findings) == 2
         assert "EU has comprehensive AI Act" in findings
         assert len(citations) >= 0  # Citations parsing may vary
@@ -120,18 +124,20 @@ The analysis shows different approaches.
 
 class TestWriterAgent:
     """Tests for writer agent"""
-    
+
     @pytest.mark.asyncio
-    async def test_writer_node_success(self, sample_research_state, sample_citations):
+    async def test_writer_node_success(
+        self, sample_research_state: ResearchState, sample_citations
+    ):
         """Test writer node generates report"""
         # Update state with required fields
-        state = {
+        state: ResearchState = {
             **sample_research_state,
             "citations": sample_citations,
             "synthesis": "The EU and US have different approaches to AI regulation.",
-            "status": "writing"
-        }
-        
+            "status": "writing",
+        }  # type: ignore
+
         mock_response = MagicMock()
         mock_response.content = """# AI Regulations Comparison
 
@@ -145,14 +151,14 @@ A comparison of EU and US AI regulations.
 ## Sources
 [1] Example Source - https://example.com
 """
-        
+
         with patch("app.agents.writer.create_writer_agent") as mock_create:
             mock_llm = AsyncMock()
             mock_llm.ainvoke.return_value = mock_response
             mock_create.return_value = mock_llm
-            
+
             result = await writer_node(state)
-            
+
             assert result["status"] == "complete"
             assert result["final_report"] is not None
             assert "AI Regulations" in result["final_report"]
